@@ -3,29 +3,38 @@ define n = Character("Narrator", color="#C8FFC8")
 define c = Character("INARI", color="#ecc2ff")
 default cube = False
 default inventory = []
+image bg_black = "#000000a1"
 
 label start:
+    nvl clear
+    Character("???", kind=nvl) "Yes..."
+    Character("???", kind=nvl) "Go to sleep..."
+    Character("???", kind=nvl) "And wake up amongst them..."
+    nvl clear
     $ config.menu_include_disabled = True
     n "You wake up in the middle of a field,"
-    n "The feel of grass blessing your hands, the sound of birds tweeting engulfing your ears, and the smell of nature filling your lungs."
+    n "The feel of grass blessing your hands,{p}the sound of birds tweeting engulfing your ears,{p}and the smell of nature filling your lungs."
     n "And the last thing you remember is..."
     n "Dying? But how..."
     n "You've forgotten how you died..."
     n "In fact, you've forgotten everything of your life..."
     n "Almost as if you never lived...{p}Just died."
     n "And this place?{p}This is a place where the forgotten reside."
-    f "Who am I?{nw=0.3}"
-    f "Where am I?{nw=0.3}"
-    f "Why am I stranded?{nw=0.5}"
+    Character(f, kind=nvl) "Who am I?{nw=0.3}"
+    Character(f, kind=nvl) "Where am I?{nw=0.3}"
+    Character(f, kind=nvl) "Why am I stranded?{nw=0.8}"
     while True:
         menu:
             "Head towards..."
             "What appears to be a wreckage of a ship, split in two." if not "HeS" in inventory:
                 call titanic
             "A cave with a warm glow extruding from inside." if not cube:
-                call cube
+                call cubeCave
             "The big building that seems you cannot return to here from...":
-                jump theWallOfGone
+                if cube:
+                    jump theWallOfGone
+                else:
+                    jump pitOfGoing
     return
 
 label titanic:
@@ -48,6 +57,7 @@ label HS:
         "Ask INARI." if cube:
             c "*Floats over to the disk.*{p}This appears to be a film from the year '2026'"
             c "It was under the genre of 'romance' and was heavily thought over at the time, everyone wanting a copy."
+            c "Although I am uncertain on what it says."
             menu:
                 "Take it.":
                     n "You place it carefully in your pocket"
@@ -61,7 +71,7 @@ label HS:
             n "You ignore it."
     return
 
-label cube:
+label cubeCave:
     n "As you approach the cave, the glow gets more and more... {w=1.5}green?"
     menu:
         "Proceed...":
@@ -105,7 +115,7 @@ label cube:
                             f "I think it's... 1534"
                             c "How strange..."
                             c "I was deactivated 2253."
-                            c "Now, the truth?"
+                            c "Now. The truth without inconsistencies?"
                         "Truth.":
                             pass
                     f "I... actually cannot remember..."
@@ -123,6 +133,24 @@ label cube:
                     return
                 "Leave the cave...":
                     return
+    return
+
+label pitOfGoing:
+    n "As you approach the building, squinting to try assess the size of it, the ground beneath you cracks."
+    n "Then crumps and collapses."
+    n "You fall through, falling and falling..."
+    n "And falling..."
+    n "..."
+    n "..."
+    n "Then..."
+    n "SPLAT!{p}You land in a pile of slime."
+    menu:
+        "Light a match...":
+            n "Looking around with the match, you see you're in a cave, covered in cobwebs,"
+            n "And looking down, you see it's not the green of slime..."
+            n "It's the red of blood!{p}And the organs of humans!"
+            f "WHAT THE—?!"
+            n "You drop the match in fright, and the blood immediately extinguishes it."
     return
 
 label theWallOfGone:
@@ -144,6 +172,24 @@ label theWallOfGone:
             call newBook
         "Read a legend's life...":
             call legendBook
+        "Look for your book...":
+            c "Human, what are you looking for?"
+            f "My book."
+            c "You realise this library is so incredibly large it will be nigh on impossible to find any one specific book."
+            c "Your cravings for needless knowledge are futile."
+    n "A small voice echoes suddenly."
+    "???" "Hello? Is anybody there? I'm alone... I don't remember anything..."
+    menu:
+        "Scream like a hooligan...":
+            pass
+        "Scream like a seagull...":
+            pass
+        "Scream like a bald eagle...":
+            n "You can almost hear the American anthem..."
+        "Scream like a cup'a'tea...":
+            n "You can almost hear the British anthem... (we have one?)"
+        "Scream like a chair getting crushed in a trash compactor...":
+            n "You can almost hear the wood creaking..."
     return
 
 label earlyBook:
@@ -152,8 +198,13 @@ label earlyBook:
     n "Your heartbeat thumps every beat."
     n "Your eyes well up..."
     f "They... they were so young..."
-    f "Why did they choose to... why... why did they dance the edge of life, stepping on death's feet?{p}Tempt fate in such a way?{p}Trust a friend to catch them when they fell..."
-    f "A life of pain and suffering... cut short by the pains of life... yet forgotten all too quickly..."
+    f "Some homework scribbled last minute..."
+    f "A birthday card..."
+    c "Why do humans bother with such needless writings?"
+    f "A journal..."
+    f "..."
+    f "Why did they choose to...{p}why... why did they dance the edge of life, stepping on death's feet?{p}Tempt fate in such a way?{p}Trust a friend to catch them when they fell..."
+    f "A life marked by  suffering... cut short by the burdens of life... yet forgotten all too quickly..."
     c "If it's any consolation, human, I'd estimate this to have been at least five thousand years ago, and chance to be more suffering if they lived than if not."
     return
 
@@ -163,7 +214,7 @@ label newBook:
     n "Each... each heart more loving than the other..."
     n "A mother who loves them dearly."
     n "A father who cherishes their very existence."
-    n "A child who's life has just begun. A life of joy."
+    n "A child whose life has just begun. A life of joy."
     f "Inari..."
     c "Yes, human? Why are you sad?"
     f "No... not sad... happy... so, so overwhelmingly happy."
@@ -171,4 +222,12 @@ label newBook:
     return
 
 label legendBook:
-    pass
+    n "It starts off unlike any life you've ever heard of."
+    n "A kid getting anything and everything they want."
+    n "A bully to many. A friend to few."
+    n "They're a legend for being popular online."
+    n "What did they do online? Social media - posting themself doing idiotic things for views."
+    c "Strange... a teenager risks their life countless times to... hope a statistic - a number - is higher than last time?"
+    c "And they get paid for that number?"
+    c "This is beyond any logic I possess..."
+    return
