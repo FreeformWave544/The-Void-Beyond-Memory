@@ -1,7 +1,9 @@
 ﻿define f = Character("??", who_prefix="Forgotten - ")
 define n = Character("Narrator", color="#C8FFC8")
 define c = Character("INARI", color="#ecc2ff")
+define a = Character("AMI", color="#dd1f3f")
 default cube = False
+default ami = False
 default inventory = []
 image bg_black = "#000000a1"
 
@@ -150,7 +152,22 @@ label pitOfGoing:
             n "And looking down, you see it's not the green of slime..."
             n "It's the red of blood!{p}And the organs of humans!"
             f "WHAT THE—?!"
-            n "You drop the match in fright, and the blood immediately extinguishes it."
+            n "You drop the match in fright, and the blood immediately extinguishes it, plummeting you back into darkness..."
+            n "..."
+            f "HELP! SOMEBODY!"
+            f "HELP!"
+            f "..."
+            n "No use.{p}No Response..."
+            n "Then suddenly you feel something brush against your feet."
+            n "Frozen in fear, you feel it crawl up your body, until it reaches your hand."
+            n "And then it starts to glow... a calming, green glow."
+            f "What... what are you?"
+            a "Ami! Ami!"
+            f "Ami, eh? Is that all you can say?"
+            a "AMI! *Climbs your arm, onto your shoulder, and nuzzles your cheek.*"
+            $ ami = True
+            f "Ami it is, then."
+
     return
 
 label theWallOfGone:
@@ -175,8 +192,15 @@ label theWallOfGone:
         "Look for your book...":
             c "Human, what are you looking for?"
             f "My book."
-            c "You realise this library is so incredibly large it will be nigh on impossible to find any one specific book."
+            c "You realise this library is so incredibly large it will be nigh on impossible to find any one specific book?"
             c "Your cravings for needless knowledge are futile."
+    menu:
+        "Read a thick book...":
+            call thickBook
+        "Read a golden book...":
+            call goldenBook
+        "Read a torn up book...":
+            call tornBook
     n "A small voice echoes suddenly."
     "???" "Hello? Is anybody there? I'm alone... I don't remember anything..."
     menu:
@@ -192,6 +216,65 @@ label theWallOfGone:
             n "You can almost hear the wood creaking..."
     return
 
+label thickBook:
+    c "From what I'm seeing, this is the book of..."
+    c "\"Sir David Attenborough\""
+    f "Wait... THE Sir David Attenborough?"
+    c "Yes - the natura—"
+    f "I'm joking. I forgot everything, remember? Or did you forget that?"
+    f "I've no clue who he is nor any care to find out."
+    n "You put the book lazily back on the shelf."
+    n "[c.name] just floats there... unspeaking... unmoving..."
+    f "Inari? You 'aight, mate?"
+    c "Sir David Attenborough was a legend. Someone who—"
+    f "A legend I do not remember, a legend who—"
+    f "Wait... I do... I think I remember him... a natural historian? Legendary broadcaster?"
+    c "Indeed... but how?"
+    f "I guess he will always be in our hearts, even if our minds are blind to him.."
+    c "The reason the book is so think is that—"
+    f "Is that he lived to over 100."
+    c "Yes..."
+    return
+
+label goldenBook:
+    f "Hmm... this cover."
+    f "It shines without reflection,"
+    f "Persists without tear,"
+    f "Not a web from any of the spiders."
+    f "As if even arachnids respect the life contained..."
+    n "Opening the first page, you look for the name."
+    n  "A name that is not to be found."
+    f "The name is missing..."
+    c "But I already know whom this is writing..."
+    f "So do I..."
+    f "A person so influential they've transcended memory."
+    f "Even for those who forget humanity, they still..."
+    c "... they still remember what humanity became from this true legend."
+    f "Indeed..."
+    return
+
+label tornBook:
+    n "The cover held on by nothing more than a thread."
+    n "The pages torn and few."
+    n "Other ripped out to shreds."
+    f "Who...? Why...?"
+    n "..."
+    c "Time is not this cruel."
+    c "Humanity."
+    c "Humanity is this cruel."
+    c "Not the individual humans - but rather the collective society."
+    f "A group... a group of people done this with full intent?"
+    n "Opening the first remaining page, you start to read."
+    nvl clear
+    Character("", kind=nvl) "\"They laughed...\""
+    Character("", kind=nvl) "\"They sneered...\""
+    Character("", kind=nvl) "\"They took her...\""
+    Character("", kind=nvl) "\"My daughter. {w=0.7}They took her.\""
+    Character("", kind=nvl) "\"My promise \""
+    n "The words end before the sentence - or even page, for that matter - should."
+    nvl clear
+    return
+
 label earlyBook:
     c "Human... I'd urge you not to read that one."
     n "And as you flick through the pages, the sound of silence intensifies."
@@ -203,7 +286,8 @@ label earlyBook:
     c "Why do humans bother with such needless writings?"
     f "A journal..."
     f "..."
-    f "Why did they choose to...{p}why... why did they dance the edge of life, stepping on death's feet?{p}Tempt fate in such a way?{p}Trust a friend to catch them when they fell..."
+    f "Why did they choose to...{p}why... why did they dance the edge of life, stepping on death's feet?{p}Tempt fate in such a way?"
+    f "Trust a friend to catch them when they fell..."
     f "A life marked by  suffering... cut short by the burdens of life... yet forgotten all too quickly..."
     c "If it's any consolation, human, I'd estimate this to have been at least five thousand years ago, and chance to be more suffering if they lived than if not."
     return
