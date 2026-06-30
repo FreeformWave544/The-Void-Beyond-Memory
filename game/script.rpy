@@ -5,7 +5,6 @@ define a = Character("AMI", color="#dd1f3f")
 default cube = False
 default ami = False
 default inventory = []
-image bg_black = "#000000a1"
 
 label start:
     nvl clear
@@ -36,13 +35,11 @@ label start:
                 if cube:
                     jump theWallOfGone
                 else:
-                    call pitOfGoing
-                    $ break
-    n "..."
+                    jump pitOfGoing
     return
 
 label titanic:
-    n "A strange ship sits before you, frost encroaching the hull - both parts."
+    n "A strange ship sits before you, frost encroaching the hull - both parts of it."
     n "The remnants of centuries ago."
     n "Seems it was called the \"Titanic\"..."
     menu:
@@ -55,12 +52,12 @@ label titanic:
 
 label HS:
     n "Upon searching one of the cabins, you find a CD disk - archaic but working - and you can make out a few of the letters..."
-    n "Although said letters are in a different, ancient language, you did learn some letters back in the school."
+    n "Although said letters are in a different, ancient language, you do recognise some."
     n "Primarily: __art_to__er _ore_er"
     menu:
         "Ask INARI." if cube:
             c "*Floats over to the disk.*{p}This appears to be a film from the year '2026'"
-            c "It was under the genre of 'romance' and was heavily thought over at the time, everyone wanting a copy."
+            c "It was under the genre of 'romance' and was heavily fought over at the time, everyone wanting a copy."
             c "Although I am uncertain on what it says."
             menu:
                 "Take it.":
@@ -87,7 +84,7 @@ label cubeCave:
         "Run your hands across the wall.":
             f "OUCH!"
             n "Your hand hits a sharp rock, and you get a small cut."
-            n "You leave the cave for better lighting to assess the wound"
+            n "You leave the cave for better lighting to assess the wound."
             return
         "Run around like a headless chicken.":
             n "Running around, you chance upon an invisible object in the middle of the room."
@@ -141,7 +138,7 @@ label cubeCave:
 
 label pitOfGoing:
     n "As you approach the building, squinting to try assess the size of it, the ground beneath you cracks."
-    n "Then crumps and collapses."
+    n "Then crumbles and collapses."
     n "You fall through, falling and falling..."
     n "And falling..."
     n "..."
@@ -159,7 +156,7 @@ label pitOfGoing:
             f "HELP! SOMEBODY!"
             f "HELP!"
             f "..."
-            n "No use.{p}No Response..."
+            n "No use.{p}No response..."
             n "Then suddenly you feel something brush against your feet."
             n "Frozen in fear, you feel it crawl up your body, until it reaches your hand."
             n "And then it starts to glow... a calming, green glow."
@@ -175,13 +172,13 @@ label pitOfGoing:
             n "The faint clicking of a spider."
             n "Then another."
             n "And another."
-            n "And then your ears are filled, cannal to cannal, with clicking and hissing."
+            n "And then your ears are filled, canal to canal, with clicking and hissing."
             n "You try to speak, but webs wrap your mouth too tight."
             n "You try to move but blood - especially this blood - is much, much thicker than water."
             n "But you can still feel."
             n "And you feel leg after leg crawling up your arms."
             n "And teeth gnawing at your legs."
-            
+
     return
 
 label theWallOfGone:
@@ -193,7 +190,7 @@ label theWallOfGone:
     n "Bookshelves?"
     n "Some books are missing covers, others the blurb, and others... others are starting to gather dust. But..."
     n "But a rare few are incomplete, yet are gathering dust."
-    c "This books appear to be stories of forgotten lives. I'd say those incomplete are still remembered..."
+    c "These books appear to be stories of forgotten lives. I'd say those incomplete are still remembered..."
     c "So legends still exist in this day and age? Hmm..."
     f "It appears so..."
     menu:
@@ -219,15 +216,35 @@ label theWallOfGone:
     "???" "Hello? Is anybody there? I'm alone... I don't remember anything..."
     menu:
         "Scream like a hooligan...":
-            pass
+            f "OWOWOWOADSOKOHOWHOWOOHWO"
         "Scream like a seagull...":
-            pass
+            f "MINE! MINE!"
+            n "Never do seagulls actually scream near beaches... no, always at random times away from beaches.{p}And you hold true to that pattern."
+            f "MINE MINE MINE MINE!!!!"
         "Scream like a bald eagle...":
+            f "Ameri{w=0.2}CAW{w=0.5}n!"
+            f "CAW!"
+            f "SCREEEEE"
             n "You can almost hear the American anthem..."
         "Scream like a cup'a'tea...":
-            n "You can almost hear the British anthem... (we have one?)"
+            f "SLLLLLLRRRRRPPPPPPP"
+            f "Oh dear, I am horribly sorry. I meant..."
+            f "HHHHIISSSSSSSSSSSSSSSSSSSSSSSSSS{p}Other_kettle_sounds.png"
+            n "You can almost hear the British anthem... {p}(we have one?)"
         "Scream like a chair getting crushed in a trash compactor...":
+            f "CRRRREEEAAAA— {w=0.5}{p}Cracking.sfx{p}Smashing.sfx"
             n "You can almost hear the wood creaking..."
+    n "..."
+    n "Silence succeeds your unholy noise."
+    n "Then..."
+    "???" "AAAAAHHHHHHHHHHHHH"
+    n "The voice screams, and grows distant."
+    menu:
+        "Put up chase...":
+            pass
+        "Ignore the voice... (Requires no morals)" if False:
+            n "How'd ya get here? Are you perhaps cheating?"
+            $ renpy.full_restart()
     return
 
 label thickBook:
@@ -244,8 +261,8 @@ label thickBook:
     f "A legend I do not remember, a legend who—"
     f "Wait... I do... I think I remember him... a natural historian? Legendary broadcaster?"
     c "Indeed... but how?"
-    f "I guess he will always be in our hearts, even if our minds are blind to him.."
-    c "The reason the book is so think is that—"
+    f "I guess he will always be in our hearts, even if our minds are blind to him..."
+    c "The reason the book is so thick is that—"
     f "Is that he lived to over 100."
     c "Yes..."
     return
@@ -259,7 +276,7 @@ label goldenBook:
     n "Opening the first page, you look for the name."
     n  "A name that is not to be found."
     f "The name is missing..."
-    c "But I already know whom this is writing..."
+    c "But I already know who this is writing..."
     f "So do I..."
     f "A person so influential they've transcended memory."
     f "Even for those who forget humanity, they still..."
@@ -270,14 +287,14 @@ label goldenBook:
 label tornBook:
     n "The cover held on by nothing more than a thread."
     n "The pages torn and few."
-    n "Other ripped out to shreds."
+    n "Others ripped out to shreds."
     f "Who...? Why...?"
     n "..."
     c "Time is not this cruel."
     c "Humanity."
     c "Humanity is this cruel."
     c "Not the individual humans - but rather the collective society."
-    f "A group... a group of people done this with full intent?"
+    f "A group... a group of people did this with full intent?"
     n "Opening the first remaining page, you start to read."
     nvl clear
     Character("", kind=nvl) "\"They laughed...\""
