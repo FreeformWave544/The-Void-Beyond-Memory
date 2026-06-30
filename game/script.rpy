@@ -36,7 +36,9 @@ label start:
                 if cube:
                     jump theWallOfGone
                 else:
-                    jump pitOfGoing
+                    call pitOfGoing
+                    $ break
+    n "..."
     return
 
 label titanic:
@@ -167,7 +169,19 @@ label pitOfGoing:
             a "AMI! *Climbs your arm, onto your shoulder, and nuzzles your cheek.*"
             $ ami = True
             f "Ami it is, then."
-
+        "Try break free...":
+            n "After lots of struggle, you manage to do absolutely nothing."
+            n "And then you hear it."
+            n "The faint clicking of a spider."
+            n "Then another."
+            n "And another."
+            n "And then your ears are filled, cannal to cannal, with clicking and hissing."
+            n "You try to speak, but webs wrap your mouth too tight."
+            n "You try to move but blood - especially this blood - is much, much thicker than water."
+            n "But you can still feel."
+            n "And you feel leg after leg crawling up your arms."
+            n "And teeth gnawing at your legs."
+            
     return
 
 label theWallOfGone:
