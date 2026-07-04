@@ -33,9 +33,10 @@ label start:
                 call cubeCave
             "The big building that seems you cannot return to here from...":
                 if cube:
-                    jump theWallOfGone
+                    call theWallOfGone
                 else:
-                    jump pitOfGoing
+                    call pitOfGoing
+                    jump end_screen
     return
 
 label titanic:
@@ -159,27 +160,76 @@ label pitOfGoing:
             n "No use.{p}No response..."
             n "Then suddenly you feel something brush against your feet."
             n "Frozen in fear, you feel it crawl up your body, until it reaches your hand."
-            n "And then it starts to glow... a calming, green glow."
+            n "And then it starts to glow... {w=1.0}a calming, green glow."
             f "What... what are you?"
             a "Ami! Ami!"
             f "Ami, eh? Is that all you can say?"
-            a "AMI! *Climbs your arm, onto your shoulder, and nuzzles your cheek.*"
+            a "AMI!"
+            n "The cute axolotl climbs your arm, onto your shoulder, and nuzzles your cheek."
             $ ami = True
             f "Ami it is, then."
+            f "Ami the Axo."
+            n "While you're distracted with Ami, their warmth seems to melt the blood beneath you."
+            n "It gets thinner and thinner until you can step free."
+            jump GoldenBloodOfAmber
         "Try break free...":
             n "After lots of struggle, you manage to do absolutely nothing."
-            n "And then you hear it."
-            n "The faint clicking of a spider."
-            n "Then another."
-            n "And another."
-            n "And then your ears are filled, canal to canal, with clicking and hissing."
-            n "You try to speak, but webs wrap your mouth too tight."
-            n "You try to move but blood - especially this blood - is much, much thicker than water."
-            n "But you can still feel."
-            n "And you feel leg after leg crawling up your arms."
-            n "And teeth gnawing at your legs."
-
+            jump spider
     return
+
+label spider:
+    n "And then you hear it."
+    n "The faint clicking of a spider."
+    n "Then another."
+    n "And another."
+    n "And then your ears are filled, canal to canal, with clicking and hissing."
+    n "You try to speak, but webs wrap your mouth too tight."
+    n "You try to move but blood - especially this blood - is much, much thicker than water."
+    n "But you can still feel."
+    n "And you feel leg after leg crawling up your arms."
+    n "And teeth gnawing at your legs."
+    $ inventory.append("dead")
+    n "One last scream escapes your throat.{p}Then is cut short."
+    jump end_screen
+
+label GoldenBloodOfAmber:
+    n "Then suddenly..."
+    n "Ami runs off further down the cave."
+    menu:
+        "Chase after Ami!":
+            n "You run and you run — seemingly forever — until you enter a larger cave."
+        "Call after Ami!":
+            f "Ami! {p}Ami!"
+            f "AMI!"
+            f "Please!{p}Ami!{w=0.3}PLEASE!"
+            n "Your voice echos off the walls of the cave.{p}And then gets called back to you."
+            "???" "Ami?{p}Ami...{w=0.3} who's Ami??"
+            n "And without thinking,{p}deprived of human contact,{p}You chase the voice."
+            jump mysteryVoice
+        "Stay where you are.":
+            n "You stand still, staring where Ami ran.{p}Confused. {w=0.5}Worried."
+            jump spider
+    n "The walls veined in gold,{p}A pulsating glow that dazzles you each breath."
+    menu:
+        "Try scrape out some of the gold.":
+            n "As you pull out handfuls of gold, you feel exhilarated."
+            n "And it is not a powder of gold, nor solidity of gold."
+            n "A greed so deeply rooted in your humanity for you to get blinded from what you're truly holding."
+            n "Hundreds of insects and other organism that survived eternities of history, even beyond death."
+            n "The blood of hundreds of beings preserved in the blood of trees!"
+            n "And this lie of gold..."
+            n "In your hands, it starts to burn.{p}The sheer pain is immeasurable."
+            f "Oh damn."
+            n "And that burning sensation courses through your veins."
+            n "And you collapse into a pile of breathless greed."
+            $ inventory.append("greed")
+            jump end_screen
+        "Look closely...":
+            f "This is not gold... it is slightly transparent..."
+            f "And insects from across time?"
+            f "This must be amber... but why...?"
+    a "Nips at your ankles, gesturing towards the center of the room where a big obelisk stands."
+    # UNFINISHED
 
 label theWallOfGone:
     n "As you approach the building, you try to see the size..."
@@ -241,7 +291,7 @@ label theWallOfGone:
     n "The voice screams, and grows distant."
     menu:
         "Put up chase...":
-            pass
+            jump mysteryVoice
         "Ignore the voice... (Requires no morals)" if False:
             n "How'd ya get here? Are you perhaps cheating?"
             $ renpy.full_restart()
@@ -345,4 +395,41 @@ label legendBook:
     c "Strange... a teenager risks their life countless times to... hope a statistic - a number - is higher than last time?"
     c "And they get paid for that number?"
     c "This is beyond any logic I possess..."
+    return
+
+label mysteryVoice:
+    n "You chase the voice until you end up in..."
+    # UNFINISHED
+
+label end_screen:
+    n "I forgot why you came here,{p}but let's see what you remember."
+    while True:
+        menu:
+            "CD" if "HeS" in inventory:
+                "It is an archaic CD in a language, where the title, partially translated is:{p}__art_to__er _ore_er"
+            "Cube" if cube:
+                "The \'Infinite Archive\' - a cube that bends the fabric of life as linear time."
+            "Leave":
+                $ renpy.break
+    if "dead" in inventory or "greed" in inventory:
+        menu:
+            "Choose your ending..."
+            "Death." if "dead" in inventory:
+                "No matter what happened, you died."
+                "And in death, memories don't follow you."
+                "You remember nothing."
+            "Greed." if "greed" in inventory:
+                "Your needless want for more of nothing was the doom of you."
+                "Wasted for nothing."
+        return
+    menu:
+        "Choose your ending..."
+        "\"Content With Life\" ending..." if ami:
+            a "*Scales your arm and hugs your neck.*"
+            "Peace... Calm...{w=1.0} Friendship."
+            "Y'know, the silent "
+        "\"The Meaning of Life\" ending..." if cube:
+            c "Hmm."
+            c "Understandable."
+            c "Mortality is always the doom of humanity — no matter how good or safe the life lived."
     return
