@@ -229,6 +229,44 @@ label GoldenBloodOfAmber:
             f "And insects from across time?"
             f "This must be amber... but why...?"
     a "Nips at your ankles, gesturing towards the center of the room where a big obelisk stands."
+    f "What... what is that?"
+    n "You feel an irresistible urge to approach the obelisk,{p}And as your hand rests on the rough casing you witness a black so deep it rivals that of obsidian."
+    menu:
+        a "Wiggling up to the obelisk, Ami nibbles at a crack in it running all the way up."
+        "Try pry the obelisk open...":
+            n "Fitting your fingers in the crack and using the physics of leverage, you manage to have the obelisk fall apart nicely into two pieces."
+        "Try break the obelisk open...":
+            n "After hours spent tirelessly chipping away at the stone structure, eventually you get it open..."
+        "Do the Macarena...":
+            f "Heeeyyyyyyyy...{nw=0.5}{p}Macarena!"
+            n "And with that... the obelisk cracks open, falling into two near-perfect ovals."
+            a "Ami!"
+            n "You look down and realise that it was Ami who tore it apart."
+            f "Oh...{p}Noooooooo... Macarena!"
+        "Move on...":
+            n "You slide to the left..."
+            n "You slide to the right!"
+            n "Criss-Cross!{p}Criss-Cross!"
+            f "Cha-Cha real smooth!"
+            f "Let's go to work!"
+            n "And by vibing to the song, you accidentally head off to work."
+            menu:
+                n "While driving your car there, you find a fork in the road..."
+                "To the left.":
+                    n "That is the correct lyric to follow..."
+                "Take it back now y'all.":
+                    n "WRONG! You can never take it back.{p}You're doomed to forever do the Cha-Cha Slide!"
+                "Hands on your knees.":
+                    n "Wow. You look like an idiot."
+                    n "..."
+                    n "Idiot."
+                "Get funky with it.":
+                    n "You put your hands up in the air... like you just don't care..."
+            n "You work tirelessly, throughout day and night. The coldest of colds and the hottest of heatwaves...{p}And then it all ends. You die..."
+            n "You sold both your kidneys on the internet..."
+            n "What a dumb way to die..."
+            n "Idiot."
+            jump end_screen
     # UNFINISHED
 
 label theWallOfGone:
@@ -403,14 +441,15 @@ label mysteryVoice:
 
 label end_screen:
     n "I forgot why you came here,{p}but let's see what you remember."
-    while True:
+    $ gone = False
+    while not gone:
         menu:
             "CD" if "HeS" in inventory:
                 "It is an archaic CD in a language, where the title, partially translated is:{p}__art_to__er _ore_er"
             "Cube" if cube:
                 "The \'Infinite Archive\' - a cube that bends the fabric of life as linear time."
             "Leave":
-                $ renpy.break
+                $ gone = True
     if "dead" in inventory or "greed" in inventory:
         menu:
             "Choose your ending..."
@@ -425,7 +464,7 @@ label end_screen:
     menu:
         "Choose your ending..."
         "\"Content With Life\" ending..." if ami:
-            a "*Scales your arm and hugs your neck.*"
+            a "Scales your arm and hugs your neck."
             "Peace... Calm...{w=1.0} Friendship."
             "Y'know, the silent "
         "\"The Meaning of Life\" ending..." if cube:
