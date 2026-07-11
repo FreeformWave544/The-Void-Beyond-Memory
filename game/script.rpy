@@ -267,7 +267,14 @@ label GoldenBloodOfAmber:
             n "What a dumb way to die..."
             n "Idiot."
             jump end_screen
-    # UNFINISHED
+    n "The removal of the obelisk reveals a strange orb, no larger than a football, embedded in one of the halves."
+    n "And what is so strange about this orb is that it is an absence of light — where light should be, it is instead absorbed."
+    menu:
+        "Pick it up...":
+            n "Before you can do anything..."
+        "Leave it be...":
+            n "As you stare at it a moment too long..."
+    a "Jumps at the orb, immediately disappearing into The Void Beyond Halves."
 
 label theWallOfGone:
     n "As you approach the building, you try to see the size..."
