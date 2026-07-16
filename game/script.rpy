@@ -275,6 +275,7 @@ label GoldenBloodOfAmber:
         "Leave it be...":
             n "As you stare at it a moment too long..."
     a "Jumps at the orb, immediately disappearing into The Void Beyond Halves."
+    return
 
 label theWallOfGone:
     n "As you approach the building, you try to see the size..."
@@ -444,7 +445,33 @@ label legendBook:
 
 label mysteryVoice:
     n "You chase the voice until you end up in..."
-    # UNFINISHED
+    n "In a strange room made of what seems to be obsidian..."
+    if cube:
+        n "And a cardboard box full of items sitting in the middle of it."
+        c "This appears to be a primitive human 'Lost and Found' system. Before the invention of the Ever-Tracking."
+        n "And there's the person you were chasing, looking through it."
+        n "A girl, no older than 15, and eyes made of years of fear and urgency."
+        f "What are... what are you doing?"
+        "Girl" "Can't let them... can't let them become forgotten!"
+        "Girl" "Can't have them end up like Daisy!"
+        f "Who was Daisy? What happened to her?"
+        n "The girl ignores, focusing on sorting the items."
+        f "Too hard of a topic? Okay."
+        f "What is this place?"
+        "Girl" "This place?"
+        "Girl" "This place..."
+        "Girl" "Home."
+        n "A warm, small smile steals her frantic expression for but a second"
+        n "Then she goes back to sorting."
+    elif ami:
+        n "And a big nest full of items sitting in the middle of it."
+        f "Is this... 'Lost and Found'?"
+        a "Ami jumps into the nest and lays down next to the person you were just chasing.{P}Who's now sleeping in the nest, amongst toys."
+        n "A girl, no older than 15, laying there, peacefully without any fear."
+
+    else:
+        n "Yet you're here alone. You decide to head back."
+    jump end_screen
 
 label end_screen:
     n "I forgot why you came here,{p}but let's see what you remember."
