@@ -117,6 +117,7 @@ label cubeCave:
                             f "I think it's... 1534"
                             c "How strange..."
                             c "I was deactivated 2253."
+                            c "And enough time must have passed for me to be forgotten."
                             c "Now. The truth without inconsistencies?"
                         "Truth.":
                             pass
@@ -127,6 +128,9 @@ label cubeCave:
                     f "No..."
                     c "And what is your name?"
                     f "No... I don't *remember*!"
+                    c "You don't? How peculiar?"
+                        
+
         "Try smash it with a rock.":
             n "As the rock makes contact...{p}And... {w=0.2}it doesn't? It runs through where the cube was merely a moment ago."
             menu:
@@ -135,6 +139,26 @@ label cubeCave:
                     return
                 "Leave the cave...":
                     return
+    menu:
+        f "Say... you're an archive? Can I ask you about what you know?"
+        "What is human's greatest creation?":
+            c "It is frequently thought to be the invention of the wheel."
+            f "The... wheel? A circle that spins?"
+            c "Indeed. The wheel pioneered land transport, energy storage, and so, so much more."
+            f "Hmm..."
+        "What is it to be human?":
+            c "Searching..."
+            c "Aristotle said that humans are \"The rational animal.\" But another archive says another thing. And another archive another idea."
+            c "No true agreement reached. Does that answer your question?"
+            f "No. I want to know what you think it is to be human. Not some irrelevant human."
+            c "I am not human, and as such I cannot and will not answer such a question."
+        "What is it to have hope?":
+            c "Some wise men have said hope is to ensure blue is not the last hue you are painted."
+            c "Others say it is to have faith. Faith that things will get better. Faith in me and faith in you."
+            c "From a religious standpoint it is to know God will be there for you when you die, and that you will be reunited with your lost ones."
+        "What is a dream?":
+            c "A human brain's way of processing events of the day."
+            c "It is memory consolidation and emotional processing."
     return
 
 label pitOfGoing:
