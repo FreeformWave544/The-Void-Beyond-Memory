@@ -13,7 +13,6 @@ label start:
     Character("???", kind=nvl) "And wake up amongst them..."
     nvl clear
     $ config.menu_include_disabled = True
-    jump forgottenEcho
     n "You wake up in the middle of a field,"
     n "The feel of grass blessing your hands,{p}the sound of birds tweeting engulfing your ears,{p}and the smell of nature filling your lungs."
     n "And the last thing you remember is..."
@@ -180,10 +179,10 @@ label cubeCave:
     n "Echos you recognise yet have never heard."
     n "\"This is where all your dreams come true.\nThis is where you came to die, came to flourish, and came to learn.\""
     menu:
-        "Turn tail and run..#":
+        "Turn tail and RUN!":
             pass
-        "Reach out to touch INARI.>.":
-            pass
+        "Reach out to touch INARI...":
+            n "Upon contact with the cube, it starts to glow.{p}A bright, golden glow. One which mimics the colour of amber."
         "#£(xZ\//-":
             call forgottenEcho
 
@@ -212,7 +211,6 @@ label forgottenEcho:
     Character("Forgotten - ??", kind=nvl) "NO!"
     nvl clear
     $ config.menu_include_disabled = False
-    $ options = True
     $ run = True
     $ stay = True
     $ remember = True
@@ -221,7 +219,7 @@ label forgottenEcho:
         alpha 0.0
         linear 0.03 alpha 0.7
         linear 0.07 alpha 0.0
-    while options:
+    while run or stay or remember:
         menu:
             "Run." if run:
                 $ run = False
@@ -229,8 +227,6 @@ label forgottenEcho:
                 $ stay = False
             "Remember." if remember:
                 $ remember = False
-        if not run and not stay and not remember:
-            $ options = False
         show wrong_flash at wrongflash
         pause 0.1
         hide wrong_flash
