@@ -13,6 +13,7 @@ label start:
     Character("???", kind=nvl) "And wake up amongst them..."
     nvl clear
     $ config.menu_include_disabled = True
+    jump forgottenEcho
     n "You wake up in the middle of a field,"
     n "The feel of grass blessing your hands,{p}the sound of birds tweeting engulfing your ears,{p}and the smell of nature filling your lungs."
     n "And the last thing you remember is..."
@@ -159,6 +160,85 @@ label cubeCave:
         "What is a dream?":
             c "A human brain's way of processing events of the day."
             c "It is memory consolidation and emotional processing."
+    menu:
+        "Why do people hurt other people?":
+            pass
+        "Why do people hurt other people?":
+            pass
+        "Why do people hurt other people?":
+            pass
+    c "Searching..."
+    c "Searching..."
+    c "Searching..."
+    c "..."
+    c "......"
+    c "<Unknown Error: #3175>"
+    c "Memory Integrity Check{w=0.1}.{w=0.1}.{w=0.4}. {w=0.4}FAILED — Highly Volatile"
+    c "<Null Pointer>"
+    c "Wrong.{p}This is wrong."
+    n "And upon those words, you hear the echos."
+    n "Echos you recognise yet have never heard."
+    n "\"This is where all your dreams come true.\nThis is where you came to die, came to flourish, and came to learn.\""
+    menu:
+        "Turn tail and run..#":
+            pass
+        "Reach out to touch INARI.>.":
+            pass
+        "#£(xZ\//-":
+            call forgottenEcho
+
+    jump end_screen
+
+label forgottenEcho:
+    nvl clear
+    Character("Unforgettable", kind=nvl) "Call the nameless."
+    Character("Unforgettable", kind=nvl) "Hear the voiceless."
+    Character("Unforgettable", kind=nvl) "Speak the forename."
+    Character("Unforgettable", kind=nvl) "Speak the final name."
+    Character("Unforgettable", kind=nvl) "Speak the unspoken."
+    Character("Unforgettable", kind=nvl) "Speak not anymore."
+    Character("Unforgettable", kind=nvl) ""
+    Character("Unforgettable", kind=nvl) "Forget your name."
+    Character("Unforgettable", kind=nvl) "Forget your voice."
+    Character("Unforgettable", kind=nvl) "Forget your heart."
+    Character("Unforgettable", kind=nvl) "Forget yourself."
+    Character("Unforgettable", kind=nvl) "Erase the dream."
+    Character("Unforgettable", kind=nvl) "Erase the soul."
+    Character("Unforgettable", kind=nvl) "Erase the mind."
+    Character("Unforgettable", kind=nvl) "Forget yourself."
+    Character(" ", kind=nvl) " "
+    Character(" ", kind=nvl) " "
+    " " " "
+    Character("Forgotten - ??", kind=nvl) "NO!"
+    nvl clear
+    $ config.menu_include_disabled = False
+    $ options = True
+    $ run = True
+    $ stay = True
+    $ remember = True
+    image wrong_flash = Solid("#f00")
+    transform wrongflash:
+        alpha 0.0
+        linear 0.03 alpha 0.7
+        linear 0.07 alpha 0.0
+    while options:
+        menu:
+            "Run." if run:
+                $ run = False
+            "Stay." if stay:
+                $ stay = False
+            "Remember." if remember:
+                $ remember = False
+        if not run and not stay and not remember:
+            $ options = False
+        show wrong_flash at wrongflash
+        pause 0.1
+        hide wrong_flash
+    menu:
+        "Forget.":
+            pass
+
+    $ config.menu_include_disabled = True
     return
 
 label pitOfGoing:
