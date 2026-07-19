@@ -5,6 +5,7 @@ define a = Character("AMI", color="#dd1f3f")
 default cube = False
 default ami = False
 default inventory = []
+default persistent.unforgotten = False
 
 label start:
     nvl clear
@@ -96,6 +97,8 @@ label cubeCave:
             n "Idiot."
             f "OUCH!"
         "Assess the shape of it.":
+            if persistent.unforgotten:
+                jump XCube
             n "It appears to be a cube."
             f "Hmm... this appears to be a cube..."
             menu:
@@ -188,6 +191,21 @@ label cubeCave:
 
     jump end_screen
 
+label XCube:
+    n "It appears to be a cuboid."
+    f "Hmm... this appears to be a cuboid..."
+    menu:
+        "Try do a handstand on it. (I know you want to.)" if False:
+            pass
+        " ":
+            n "The cuboid turns to mush beneath your touch and falls in a glowing, green blob."
+            n "A blob which swiftly fades and hardens into rock."
+            n "Regular rock."
+    return
+
+default run = True
+default stay = True
+default remember = True
 label forgottenEcho:
     nvl clear
     Character("Unforgettable", kind=nvl) "Call the nameless."
@@ -211,9 +229,6 @@ label forgottenEcho:
     Character("Forgotten - ??", kind=nvl) "NO!"
     nvl clear
     $ config.menu_include_disabled = False
-    $ run = True
-    $ stay = True
-    $ remember = True
     image wrong_flash = Solid("#f00")
     transform wrongflash:
         alpha 0.0
@@ -232,10 +247,21 @@ label forgottenEcho:
         hide wrong_flash
     menu:
         "Forget.":
-            pass
+            "" "{w=0.1}.{w=0.1}.{w=0.1}.{w=0.1}.{w=0.1}.{w=0.1}.{w=0.1}"
+            "" ".....{w=0.1}{nw}"
+            "" "....{w=0.1}{nw}"
+            "" "...{w=0.1}{nw}"
+            "" "..{w=0.1}{nw}"
+            "" ".{w=0.1}{nw}"
+            "" "{w=0.1}{nw}"
+            "" "{w=0.1}{nw}"
+            "" "{w=0.1}{nw}"
+            n "Your world goes dark.{p}Your mind goes blank."
+            n "Your humanity goes dark."
+            n "And your narrator silent."
 
     $ config.menu_include_disabled = True
-    return
+    jump end_screen
 
 label pitOfGoing:
     n "As you approach the building, squinting to try assess the size of it, the ground beneath you cracks."
@@ -575,6 +601,14 @@ label mysteryVoice:
 
 label end_screen:
     n "I forgot why you came here,{p}but let's see what you remember."
+    if not run and not stay and not remember:
+        "Unforgettable" "You have no right to live."
+        "Unforgettable" "You have no right to die."
+        "Unforgettable" "You have no right to retry."
+        "Unforgettable" "You have forgotten what you done wrong, and shall face the consequences."
+        "Unforgettable" "In your next life."
+        $ persistent.unforgotten = True
+        return
     $ gone = False
     while not gone:
         menu:
